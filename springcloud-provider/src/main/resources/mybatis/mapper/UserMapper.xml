@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.oyh.mapper.UserMapper">
+
+    <select id="queryCount" resultType="int">
+        select count(1) from t_user where 1=1
+            <if test="userName !=null and ''!=userName ">
+                and user_name like '%${userName}%'
+            </if>
+    </select>
+
+    <select id="queryUser" resultType="com.oyh.model.User">
+        select
+           user_id as userId,
+            user_name as userNmae,
+            user_password as userPassword,
+            user_role as userRole,
+            user_dept as userDept,
+            user_money as userMoney,
+            user_motto as userMotto
+
+            from t_user
+            where 1=1
+            <if test="u.userName !=null and ''!=u.userName">
+                and user_name like '%${u.userName}%'
+            </if>
+            limit #{start},#{rows}
+    </select>
+
+
+    <select id="delUserById">
+        delete from t_user where
+        user_id in
+        <foreach collection="array" item="arr" index="no" open="("
+                 separator="," close=")">
+            #{arr}
+        </foreach>
+    </select>
+
+</mapper>

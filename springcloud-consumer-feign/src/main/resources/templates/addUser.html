@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"   xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-1.9.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap3/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/js/bootstrap3/css/bootstrap.css}"/>
+    <!-- bootstrap日期插件 -->
+    <script th:src="@{/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js}"></script>
+    <script th:src="@{/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js}"></script>
+    <link rel="stylesheet" th:href="@{/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css}">
+
+    <!--bootstrap下拉框多选和样式-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/i18n/defaults-zh_CN.min.js"></script>
+</head>
+<body>
+    <h1>添加用户</h1>
+    <form class="form-horizontal" th:action="@{/add}" method="post">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">姓名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="userName" placeholder="userName" style="width: 350px">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" name="userPassword" placeholder="userPassword"  style="width: 350px">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="userRole" class="col-sm-2 control-label">职位</label>
+            <div class="col-sm-3">
+                <select name="userRole"  id="userRole" class="form-control">
+                    <option value="-1">--请选择--</option>
+                    <option th:each="role : ${roleList}" th:value="${role.roleId}">
+                        <span th:text="${role.roleName}"></span>
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="userDept" class="col-sm-2 control-label">部门</label>
+            <div class="col-sm-3">
+                <select name="userDept"  id="userDept" class="form-control">
+                    <option value="-1">--请选择--</option>
+                    <option th:each="dept : ${deptList}" th:value="${dept.deptId}">
+                        <span th:text="${dept.deptName}"></span>
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">薪资</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="userMoney" placeholder="userMoney" style="width: 350px">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">座右铭</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="userMotto" placeholder="userMotto" style="width: 350px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input type="submit" value="提交" class="btn btn-info" />
+                <a th:href="@{/queryUser}" class="btn btn-info">返回</a>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
